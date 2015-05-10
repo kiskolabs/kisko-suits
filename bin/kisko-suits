@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/kisko-suits"
+
+begin
+  KiskoSuits::Application.new(ARGV).run
+rescue Errno::ENOENT => err
+  abort "kisko-suits: #{err.message}"
+rescue OptionParser::InvalidOption => err
+  abort "kisko-suits: #{err.message}\nusage: rcat [-bns] [file ...]"
+end

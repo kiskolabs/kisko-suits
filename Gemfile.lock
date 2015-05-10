@@ -1,0 +1,18 @@
+PATH
+  remote: .
+  specs:
+    kisko-suits (0.0.1)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    filewatcher (0.5.0)
+      trollop (~> 2.0)
+    trollop (2.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  filewatcher
+  kisko-suits!

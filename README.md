@@ -18,12 +18,14 @@ File name 'my-presentation.md.conf' would cause kisko-suits to create a markdown
 
 my-presentation.md.conf content is file names (with possible **relative** path):
 
-```introduction.md
+```
+introduction.md
 company/basic_information.md
 project-details.md
 CVs/antti.md
 CVs/vesa.md
-contact_information.md```
+contact_information.md
+```
 
 These will then be merged as my-presentation.md when you run:
 

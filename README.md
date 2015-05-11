@@ -2,6 +2,10 @@
 
 This app was meant to compile markdown partials as one document for our sales team using Deckset for Mac.
 
+We create sales presentations and such using [Deckset](http://www.decksetapp.com/). There are a lot of information on those documents that we need to use again and again. Our only solution was to copy and paste that information to the new presentation each time we started to create one.
+
+With Kisko Suits we can create re-usable partials (for example company intro, CVs, contact information) and compile a presentation. Kisko Suits will update the master markdown file everytime a partial is changed/added/removed.
+
 ### Installation
 
 ```gem install kisko-suits```

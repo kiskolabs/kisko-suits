@@ -16,4 +16,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 1.9.2"
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "kisko-suits"
+
+  s.add_dependency 'filewatcher'
 end

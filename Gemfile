@@ -1,5 +1,3 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gemspec
-
-gem 'filewatcher'

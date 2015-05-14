@@ -2,7 +2,6 @@ module KiskoSuits
   class Application
     def initialize(argv)
       @params, @files = parse_options(argv)
-      # @compiler = KiskoSuits::Compiler.new(@params)
     end
 
     def run
@@ -17,12 +16,10 @@ module KiskoSuits
             compiler.included_filenames
           }
           KiskoSuits::Watcher.new(@files.first, on_update).start
-          # @compiler.watch_and_render(@files.first)
         else
           compiler = KiskoSuits::Compiler.new(@files.first)
           compiler.render
           puts "Processed files and compiled '#{compiler.output_filename}'"
-          # @compiler.render(@files.first)
         end
       end
     end

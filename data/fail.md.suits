@@ -1,2 +1,2 @@
-fail.md
-asdas/asdas.md
+include: fail.md
+include: asdas/asdas.md

@@ -2,8 +2,8 @@ require "open3"
 require "fileutils"
 working_dir = File.dirname(__FILE__)
 
-good_config = "#{working_dir}/data/preso.md.conf"
-bad_config = "#{working_dir}/data/fail.md.conf"
+good_config = "#{working_dir}/data/preso.md.suits"
+bad_config = "#{working_dir}/data/fail.md.suits"
 good_output = "#{working_dir}/data/preso.md"
 proper_output = "#{working_dir}/data/preso.md_proper"
 

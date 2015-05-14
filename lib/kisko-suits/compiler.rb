@@ -21,8 +21,8 @@ module KiskoSuits
 
     def render(data)
       abort "Config file '#{data}' not found" unless File.exists?(data)
-      @output_filename = data.gsub(".conf", "")
-      abort "Problem with config file (should end with .conf)" if data == @output_filename
+      @output_filename = data.gsub(".suits", "")
+      abort "Problem with config file (should end with .suits)" if data == @output_filename
       File.delete(@output_filename) if File.exists?(@output_filename)
       @output_file = File.new(@output_filename,'w')
       @filenames = process_files(data)

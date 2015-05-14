@@ -6,8 +6,8 @@ module KiskoSuits
     end
 
     def run
-      if @files.empty? || @files.size > 1 || !@files.first.include?(".conf")
-        abort "Usage: 'kisko-suits my-presentation.md.conf'\n\nOr start watching file with: 'kisko-suits -w my-presentation.md.conf'"
+      if @files.empty? || @files.size > 1 || !@files.first.include?(".suits")
+        abort "Usage: 'kisko-suits my-presentation.md.suits'\n\nOr start watching file with: 'kisko-suits -w my-presentation.md.suits'"
       else
         if @params[:watch]
           @compiler.watch_and_render(@files.first)

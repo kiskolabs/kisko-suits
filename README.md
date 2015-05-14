@@ -12,11 +12,11 @@ With Kisko Suits we can create re-usable partials (for example company intro, CV
 
 ### Usage
 
-Create a config file for your presentation:
+Create a config file (.suits file) for your presentation:
 
-File name 'my-presentation.md.conf' would cause kisko-suits to create a markdown file my-presentation.md
+File name 'my-presentation.md.suits' would cause kisko-suits to create a markdown file my-presentation.md
 
-my-presentation.md.conf content is file names (with possible **relative** path):
+my-presentation.md.suits content is file names (with possible **relative** path):
 
 ```
 introduction.md
@@ -29,10 +29,10 @@ contact_information.md
 
 These will then be merged as my-presentation.md when you run:
 
-```kisko-suits my-presentation.md.conf```
+```kisko-suits my-presentation.md.suits```
 
 Super simple.
 
 If you want to update the output file when any of the partials in config are updated, just use the -w switch:
 
-```kisko-suits -w my-presentation.md.conf```
+```kisko-suits -w my-presentation.md.suits```

@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "kisko-suits"
 
   s.add_dependency 'filewatcher'
+  s.add_development_dependency 'rspec', '>= 3.2.0'
 end

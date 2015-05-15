@@ -7,5 +7,5 @@ begin
 rescue Errno::ENOENT => err
   abort "kisko-suits: #{err.message}"
 rescue OptionParser::InvalidOption => err
-  abort "kisko-suits: #{err.message}\nusage: rcat [-bns] [file ...]"
+  abort "kisko-suits: #{err.message}\n"
 end

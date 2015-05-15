@@ -1,53 +1,55 @@
+require "set"
+
 module KiskoSuits
   class Compiler
-    def initialize(params)
+    attr_reader :path, :output_filename, :included_filenames
 
+    def initialize(path)
+      @path = path
+      @output_filename = nil
+
+      @included_filenames = Set.new
     end
 
-    def process_files(data)
-      @filenames = []
-      File.open(data, 'r') do |f|
-        f.each_line do |line|
-          file = File.dirname(data) + "/" + line.strip
-          if File.exists?(file)
-            @filenames << file
-          else
-            abort "File '#{file} not found'"
-          end
+    def render
+      @included_filenames.clear
+
+      abort "Suits file '#{path}' not found" unless File.exists?(path)
+
+      open_output_file do |output|
+        File.foreach(path) do |line|
+          output.write(process_line(File.dirname(path), line))
         end
       end
-      return @filenames
     end
 
-    def render(data)
-      abort "Config file '#{data}' not found" unless File.exists?(data)
-      @output_filename = data.gsub(".suits", "")
-      abort "Problem with config file (should end with .suits)" if data == @output_filename
-      File.delete(@output_filename) if File.exists?(@output_filename)
-      @output_file = File.new(@output_filename,'w')
-      @filenames = process_files(data)
-      @filenames.each do |f|
-        @output_file.print(File.read(f))
-      end
-      @output_file.close
-      puts "Proccessed files and compiled '#{@output_filename}'"
-    end
+    private
 
-    def watch_and_render(data)
-      render(data)
-      @filenames = process_files(data)
-      puts "Watch mode enabled"
-      files = [data] + @filenames
-      @filewatcher = FileWatcher.new(files)
-      @filewatcher.watch do |filename|
-        if filename == data
-          @filewatcher.finalize
-          watch_and_render(data)
+    def process_line(root_dir, line)
+      if match = line.match(/\s*include:\s*([\w\.\/]+)/)
+        included_path = "#{root_dir}/#{match[1]}"
+        if File.exists?(included_path)
+          @included_filenames << included_path
+
+          File.foreach(included_path).map { |included_line|
+            process_line(File.dirname(included_path), included_line)
+          }.join
         else
-          render(data)
+          puts "Include #{included_path} can't be found"
+          ""
         end
+      else
+        line
       end
+    end
+
+    def open_output_file(&block)
+      @output_filename = path.gsub(".suits", "")
+
+      abort "Problem with config file (should end with .suits)" if path == @output_filename
+
+      File.delete(@output_filename) if File.exists?(@output_filename)
+      File.open(@output_filename, 'w', &block)
     end
   end
-
 end

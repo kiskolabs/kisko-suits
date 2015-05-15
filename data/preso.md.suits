@@ -1,2 +1,5 @@
-test.md
-folder/proot.md
+include: test.md
+
+extra content
+
+include: folder/proot.md

@@ -1,0 +1,10 @@
+script: "rspec spec"
+language: "ruby"
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.2.2
+gemfile:
+  - Gemfile
+notifications:
+  disable: true

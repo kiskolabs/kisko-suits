@@ -6,6 +6,8 @@ We create sales presentations and such using [Deckset](http://www.decksetapp.com
 
 With Kisko Suits we can create re-usable slides (for example company intro, CVs, contact information) and include those to a compiled presentation. Kisko Suits will update the master Markdown file everytime an included slide is changed/added/removed.
 
+Read our blog post about Kisko Suits [here](http://www.kiskolabs.com/work/kisko-suits/).
+
 ### Installation
 
 Everything you need is already installed on every Apple computer. Just run:

@@ -48,7 +48,6 @@ module KiskoSuits
 
       abort "Problem with config file (should end with .suits)" if path == @output_filename
 
-      File.delete(@output_filename) if File.exists?(@output_filename)
       File.open(@output_filename, 'w', &block)
     end
   end

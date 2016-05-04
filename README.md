@@ -50,6 +50,25 @@ If you want to update the output file when any of the included portions in the c
 
 This makes it fast to work with the files and see the end result in Deckset.
 
+### ZSH function
+
+Add this to your `.zshrc` to use `deck my_presentation.md` and automatically create the `.suits` file, open it in atom and Deckset.
+
+
+``` zsh
+function deck {
+  local suits_file
+  suits_file=($(echo $1 | xargs).suits)
+  if [[ ! -e $1 ]] ; then
+    touch $1
+  fi
+  if [[ ! -e $suits_file ]] ; then
+    touch $suits_file
+  fi
+  open -a Deckset $1 && atom $suits_file && kisko-suits -w $suits_file
+}
+```
+
 ### CI Build Status
 
 ![](https://magnum.travis-ci.com/kiskolabs/kisko-suits.svg?token=DwseF79747iq46syMYaD)

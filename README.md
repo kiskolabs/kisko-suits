@@ -71,4 +71,4 @@ function deck {
 
 ### CI Build Status
 
-![](https://magnum.travis-ci.com/kiskolabs/kisko-suits.svg?token=DwseF79747iq46syMYaD)
+![](https://travis-ci.org/kiskolabs/kisko-suits.svg?branch=master)

@@ -26,7 +26,9 @@ module KiskoSuits
     private
 
     def process_line(root_dir, line)
-      if match = line.match(/\s*include:\s*([\w\.\/]+)/)
+      if line.start_with?('[//]:')
+        # It's a comment
+      elsif match = line.match(/\s*include:\s*([\w\.\/]+)/)
         included_path = "#{root_dir}/#{match[1]}"
         if File.exists?(included_path)
           @included_filenames << included_path

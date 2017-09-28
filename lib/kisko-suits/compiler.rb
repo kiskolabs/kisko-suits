@@ -16,14 +16,37 @@ module KiskoSuits
 
       abort "Suits file '#{path}' not found" unless File.exists?(path)
 
+      lines = pre_process_file(path)
+
       open_output_file do |output|
-        File.foreach(path) do |line|
+        lines.each do |line|
           output.write(process_line(File.dirname(path), line))
         end
       end
     end
 
     private
+
+    def pre_process_file(path)
+      lines = []
+      variables = []
+      File.foreach(path) do |line|
+        if line.start_with?('$$')
+          variables << line
+        else
+          lines << line
+        end
+      end
+      if variables.any?
+        lines.each do |line|
+          variables.each do |variable|
+            variable_name, variable_value = variable.split("=").map(&:strip)
+            line.gsub!(Regexp.new(Regexp.escape(variable_name)), variable_value)
+          end
+        end
+      end
+      lines
+    end
 
     def process_line(root_dir, line)
       if line.start_with?('[//]:')

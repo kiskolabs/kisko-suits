@@ -25,12 +25,13 @@ my-presentation.md.suits contains normal Markdown content and included portions 
 ```
 # Presentation #1
 
+$$custom_variables = amazing custom variables
 include: introduction.md
 include: company/basic_information.md
 
 ## Custom extra information
 
-All Markdown formatting **works**.
+All Markdown formatting **works** and you can use $$custom_variables to save time.
 
 include: project-details.md
 include: CVs/antti.md

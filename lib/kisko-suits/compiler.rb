@@ -31,7 +31,7 @@ module KiskoSuits
       lines = []
       variables = []
       File.foreach(path) do |line|
-        if line.start_with?('$$')
+        if line.match(/\s*\$\$\w+\s?=/)
           variables << line
         else
           lines << line

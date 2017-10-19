@@ -4,3 +4,5 @@ $$another_variable=Kisko
 Normal content $$another_variable
 
 $$my_variable
+
+include: short_test.md

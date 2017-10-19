@@ -9,17 +9,17 @@ module KiskoSuits
       @output_filename = nil
 
       @included_filenames = Set.new
+      @variables = {}
     end
 
     def render
       @included_filenames.clear
+      @variables.clear
 
       abort "Suits file '#{path}' not found" unless File.exists?(path)
 
-      lines = pre_process_file(path)
-
       open_output_file do |output|
-        lines.each do |line|
+        File.foreach(path).each do |line|
           output.write(process_line(File.dirname(path), line))
         end
       end
@@ -27,30 +27,14 @@ module KiskoSuits
 
     private
 
-    def pre_process_file(path)
-      lines = []
-      variables = []
-      File.foreach(path) do |line|
-        if line.match(/\s*\$\$\w+\s?=/)
-          variables << line
-        else
-          lines << line
-        end
-      end
-      if variables.any?
-        lines.each do |line|
-          variables.each do |variable|
-            variable_name, variable_value = variable.split("=").map(&:strip)
-            line.gsub!(Regexp.new(Regexp.escape(variable_name)), variable_value)
-          end
-        end
-      end
-      lines
-    end
-
     def process_line(root_dir, line)
       if line.start_with?('[//]:')
         # It's a comment
+        ""
+      elsif line.match(/\s*\$\$\w+\s?=/)
+        variable_name, variable_value = line.split("=").map(&:strip)
+        @variables[variable_name] = variable_value
+        ""
       elsif match = line.match(/\s*include:\s*([\w\.\/]+)/)
         included_path = "#{root_dir}/#{match[1]}"
         if File.exists?(included_path)
@@ -64,6 +48,10 @@ module KiskoSuits
           ""
         end
       else
+        @variables.each do |variable_name, variable_value|
+          line.gsub!(Regexp.new(Regexp.escape(variable_name)), variable_value)
+        end
+
         line
       end
     end

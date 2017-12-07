@@ -23,7 +23,7 @@ module KiskoSuits
     end
 
     def watch_file(filenames)
-      watcher = FileWatcher.new(filenames.to_a)
+      watcher = Filewatcher.new(filenames.to_a)
       watcher.watch do |changed_filename|
         process_path(changed_filename)
         watcher.finalize

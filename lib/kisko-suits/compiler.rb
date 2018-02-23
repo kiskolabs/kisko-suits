@@ -32,27 +32,12 @@ module KiskoSuits
         # It's a comment
         ""
       elsif line.match(/\s*\$\$\w+\s?=/)
-        variable_name, variable_value = line.split("=").map(&:strip)
-        @variables[variable_name] = variable_value
-        ""
+        set_variable(line)
       elsif match = line.match(/\s*include:\s*([\w\.\/]+)/)
         included_path = "#{root_dir}/#{match[1]}"
-        if File.exists?(included_path)
-          @included_filenames << included_path
-
-          File.foreach(included_path).map { |included_line|
-            process_line(File.dirname(included_path), included_line)
-          }.join
-        else
-          puts "Include #{included_path} can't be found"
-          ""
-        end
+        include_file(included_path)
       else
-        @variables.each do |variable_name, variable_value|
-          line.gsub!(Regexp.new(Regexp.escape(variable_name)), variable_value)
-        end
-
-        line
+        substitute_variables(line)
       end
     end
 
@@ -62,6 +47,33 @@ module KiskoSuits
       abort "Problem with config file (should end with .suits)" if path == @output_filename
 
       File.open(@output_filename, 'w', &block)
+    end
+
+    def set_variable(line)
+      variable_name, variable_value = line.split("=").map(&:strip)
+      @variables[variable_name] = variable_value
+      ""
+    end
+
+    def include_file(included_path)
+      if File.exists?(included_path)
+        @included_filenames << included_path
+
+        File.foreach(included_path).map { |included_line|
+          process_line(File.dirname(included_path), included_line)
+        }.join
+      else
+        puts "Include #{included_path} can't be found"
+        ""
+      end
+    end
+
+    def substitute_variables(line)
+      @variables.each do |variable_name, variable_value|
+        line = line.gsub(Regexp.new(Regexp.escape(variable_name)), variable_value)
+      end
+
+      line
     end
   end
 end

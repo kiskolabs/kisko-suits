@@ -12,7 +12,7 @@ Read our blog post about Kisko Suits [here](http://www.kiskolabs.com/work/kisko-
 
 Everything you need is already installed on every Apple computer. Just run:
 
-```gem install kisko-suits```
+`gem install kisko-suits`
 
 ### Usage
 
@@ -41,13 +41,17 @@ include: contact_information.md
 
 The included portions will be merged to the document and the end result will be saved as my-presentation.md when you run:
 
-```kisko-suits my-presentation.md.suits```
+```sh
+kisko-suits my-presentation.md.suits
+```
 
 Super simple.
 
 If you want to update the output file when any of the included portions in the config are updated, just use the -w switch:
 
-```kisko-suits -w my-presentation.md.suits```
+```sh
+kisko-suits -w my-presentation.md.suits
+```
 
 This makes it fast to work with the files and see the end result in Deckset.
 
@@ -55,8 +59,7 @@ This makes it fast to work with the files and see the end result in Deckset.
 
 Add this to your `.zshrc` to use `deck my_presentation.md` and automatically create the `.suits` file, open it in atom and Deckset.
 
-
-``` zsh
+```zsh
 function deck {
   local suits_file
   suits_file=($(echo $1 | xargs).suits)
@@ -73,3 +76,29 @@ function deck {
 ### CI Build Status
 
 ![](https://travis-ci.org/kiskolabs/kisko-suits.svg?branch=master)
+
+## Development
+
+### Running tests
+
+```sh
+bin/rspec spec
+```
+
+### Releasing new version
+
+Bump the version with **meaningful** version change:
+
+```sh
+# pick one
+gem bump --version patch # bumps to the next patch version
+gem bump --version minor # bumps to the next minor version
+gem bump --version major # bumps to the next major version
+gem bump --version 1.1.1 # bumps to the specified version
+```
+
+Build & push the new version to Rubygems:
+
+```sh
+bin/rake release
+```

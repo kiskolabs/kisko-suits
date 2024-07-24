@@ -13,7 +13,7 @@ describe KiskoSuits::Compiler do
 
   describe "incorrect filename" do
     it "gives sensible error" do
-      ksuits_out, ksuits_err, ksuits_process = Open3.capture3("bin/kisko-suits some_invalid_file")
+      ksuits_out, ksuits_err, ksuits_process = Open3.capture3("exe/kisko-suits some_invalid_file")
 
       expect(ksuits_err).to match(/Usage:/)
     end
@@ -21,7 +21,7 @@ describe KiskoSuits::Compiler do
 
   describe "with complex config" do
     it "works" do
-      ksuits_out, ksuits_err, ksuits_process = Open3.capture3("bin/kisko-suits #{good_config}")
+      ksuits_out, ksuits_err, ksuits_process = Open3.capture3("exe/kisko-suits #{good_config}")
 
       expect(FileUtils.compare_file(good_output, proper_output)).to eq true
     end
@@ -33,7 +33,7 @@ describe KiskoSuits::Compiler do
 
   describe "with missing include" do
     it "gives error message" do
-      ksuits_out, ksuits_err, ksuits_process = Open3.capture3("bin/kisko-suits #{bad_config}")
+      ksuits_out, ksuits_err, ksuits_process = Open3.capture3("exe/kisko-suits #{bad_config}")
 
       expect(ksuits_out).to match(/can't be found/)
     end

@@ -10,8 +10,9 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/kiskolabs/kisko-suits"
   s.summary = "Application to compile files as one"
   s.description = "This app was meant to compile markdown partials as one document for our sales team using Deckset for Mac"
-  s.files = Dir.glob("{bin,lib,test,examples,doc,data}/**/*") + %w(README.md)
-  s.require_path = 'lib'
+  s.files = Dir.glob("{exe,lib,test,examples,doc,data}/**/*") + %w[README.md]
+  s.require_path = "lib"
+  s.bindir = "exe"
   s.executables = ["kisko-suits"]
   s.required_ruby_version = ">= 1.9.2"
   s.required_rubygems_version = ">= 1.3.6"

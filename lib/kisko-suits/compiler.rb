@@ -16,7 +16,7 @@ module KiskoSuits
       @included_filenames.clear
       @variables.clear
 
-      abort "Suits file '#{path}' not found" unless File.exists?(path)
+      abort "Suits file '#{path}' not found" unless File.exist?(path)
 
       open_output_file do |output|
         File.foreach(path).each do |line|
@@ -56,7 +56,7 @@ module KiskoSuits
     end
 
     def include_file(included_path)
-      if File.exists?(included_path)
+      if File.exist?(included_path)
         @included_filenames << included_path
 
         File.foreach(included_path).map { |included_line|

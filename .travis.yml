@@ -1,7 +1,7 @@
 script: "rspec spec"
 language: "ruby"
 rvm:
-  - 3.3.4
+  - 3.2.3
 gemfile:
   - Gemfile
 notifications:
